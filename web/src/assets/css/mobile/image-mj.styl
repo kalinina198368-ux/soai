@@ -1,0 +1,799 @@
+.mobile-mj {
+  padding: 20px 16px
+  padding-bottom: 100px  // 为底部导航栏留出空间
+  background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%)
+  min-height: 100vh
+
+  .text-line {
+    padding: 8px 0
+    font-size: 14px
+    margin-bottom: 4px
+
+    .van-row {
+      margin: 0 -4px
+
+      .van-col {
+        padding: 0 4px
+
+        .rate {
+          display: flex
+          justify-content: center
+          align-items: center
+          background: #ffffff
+          padding: 18px 8px
+          margin: 0
+          border-radius: 14px
+          flex-flow: column
+          border: 2px solid #e8e9eb
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+          cursor: pointer
+          position: relative
+          overflow: hidden
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04)
+          min-height: 90px
+
+          &::before {
+            content: ""
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.05) 0%, rgba(74, 158, 255, 0.05) 100%)
+            opacity: 0
+            transition: opacity 0.3s ease
+          }
+
+          &:active {
+            transform: scale(0.98)
+          }
+
+          .icon {
+            text-align: center
+            margin-bottom: 10px
+            position: relative
+            z-index: 1
+
+            .van-image {
+              width: 36px
+              height: 36px
+              border-radius: 8px
+              overflow: hidden
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+              transition: transform 0.3s ease
+            }
+          }
+
+          &:hover .icon .van-image,
+          &.active .icon .van-image {
+            transform: scale(1.1)
+          }
+
+          .text {
+            text-align: center
+            font-size: 13px
+            font-weight: 500
+            color: #323233
+            letter-spacing: 0.3px
+            position: relative
+            z-index: 1
+            transition: color 0.3s ease
+          }
+        }
+
+        .model {
+          display: flex
+          justify-content: center
+          background: #ffffff
+          padding: 0
+          margin: 0
+          border-radius: 16px
+          flex-flow: column
+          border: 2px solid #e8e9eb
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+          cursor: pointer
+          position: relative
+          overflow: hidden
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06)
+          height: 100%
+
+          &::before {
+            content: ""
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.08) 0%, rgba(74, 158, 255, 0.08) 100%)
+            opacity: 0
+            transition: opacity 0.3s ease
+            z-index: 1
+          }
+
+          &:active {
+            transform: scale(0.98)
+          }
+
+          .icon {
+            text-align: center
+            position: relative
+            overflow: hidden
+            border-radius: 14px 14px 0 0
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%)
+
+            .van-image {
+              width: 100%
+              height: 110px
+              border-radius: 0
+              overflow: hidden
+              display: block
+              transition: transform 0.3s ease
+            }
+
+            &::after {
+              content: ""
+              position: absolute
+              bottom: 0
+              left: 0
+              right: 0
+              height: 40px
+              background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%)
+              pointer-events: none
+            }
+          }
+
+          &:hover .icon .van-image,
+          &.active .icon .van-image {
+            transform: scale(1.05)
+          }
+
+          .text {
+            text-align: center
+            padding: 12px 8px
+            font-size: 13px
+            font-weight: 600
+            color: #323233
+            letter-spacing: 0.3px
+            position: relative
+            z-index: 2
+            background: #ffffff
+            transition: color 0.3s ease
+
+            .van-ellipsis {
+              display: inline-block
+              max-width: 100%
+            }
+          }
+        }
+
+        .active {
+          background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%)
+          border-color: #7c5cff
+          box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.15), 0 8px 24px rgba(124, 92, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.08)
+          transform: translateY(-2px)
+
+          &::before {
+            opacity: 1
+          }
+
+          .text {
+            color: #7c5cff
+            font-weight: 700
+          }
+
+          &.rate {
+            .icon {
+              .van-image {
+                box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3)
+              }
+            }
+          }
+
+          &.model {
+            .icon {
+              &::after {
+                background: linear-gradient(180deg, transparent 0%, rgba(124, 92, 255, 0.15) 100%)
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .van-button {
+      position relative
+
+      .van-tag {
+        position absolute
+        right 20px
+      }
+    }
+
+    .align-right {
+      display flex
+      justify-content right
+    }
+  }
+
+
+  color var(--van-text-color)
+
+  .pt-6 {
+    padding: 20px 0
+    margin: 16px 0
+  }
+
+  // 算力信息优化
+  .power-info {
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-wrap: wrap
+    gap: 12px
+    background: linear-gradient(135deg, rgba(124, 92, 255, 0.08) 0%, rgba(74, 158, 255, 0.08) 100%)
+    border: 1px solid rgba(124, 92, 255, 0.15)
+    border-radius: 16px
+    padding: 16px
+    box-shadow: 0 4px 16px rgba(124, 92, 255, 0.1)
+
+    .power-item {
+      display: flex
+      flex-direction: column
+      align-items: center
+      gap: 4px
+
+      &.current {
+        .power-value {
+          font-size: 20px
+          font-weight: 700
+        }
+      }
+
+      .power-label {
+        font-size: 12px
+        color: #969799
+        font-weight: 500
+        letter-spacing: 0.3px
+      }
+
+      .power-value {
+        font-size: 16px
+        color: #7c5cff
+        font-weight: 700
+        letter-spacing: 0.5px
+
+        &.highlight {
+          background: linear-gradient(135deg, #7c5cff 0%, #4a9eff 100%)
+          -webkit-background-clip: text
+          -webkit-text-fill-color: transparent
+          background-clip: text
+        }
+      }
+    }
+
+    .power-divider {
+      color: rgba(124, 92, 255, 0.3)
+      font-size: 14px
+      font-weight: 300
+      margin: 0 4px
+    }
+  }
+
+  // 提示词输入框优化
+  .van-field {
+    margin-top: 12px
+    background: #ffffff
+    border-radius: 16px
+    overflow: hidden
+    border: 2px solid #e8e9eb
+    transition: all 0.3s ease
+
+    &:focus-within {
+      border-color: #7c5cff
+      box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.1), 0 4px 12px rgba(124, 92, 255, 0.08)
+    }
+
+    .van-field__control {
+      background: transparent
+      border: none
+      border-radius: 0
+      padding: 14px 16px
+      font-size: 14px
+      line-height: 1.6
+      color: #323233
+      min-height: 80px
+
+      &::placeholder {
+        color: #c8c9cc
+      }
+    }
+
+    .van-field__label {
+      padding: 0 16px
+      color: #646566
+      font-weight: 500
+    }
+  }
+
+  // 上传组件优化
+  .van-uploader {
+    margin-top: 12px
+    width: 100%
+    box-sizing: border-box
+
+    .van-uploader__upload {
+      background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%)
+      border: 2px dashed #7c5cff
+      border-radius: 16px
+      transition: all 0.3s ease
+      width: 100%
+      min-width: 0
+      height: 120px
+      display: flex
+      align-items: center
+      justify-content: center
+      flex-direction: column
+      gap: 8px
+      box-shadow: 0 2px 8px rgba(124, 92, 255, 0.1)
+      box-sizing: border-box
+      flex-shrink: 0
+
+      &:active {
+        background: linear-gradient(135deg, #f0f2ff 0%, #f8f9ff 100%)
+        transform: scale(0.98)
+        border-color: #4a9eff
+      }
+
+      .van-uploader__upload-icon {
+        color: #7c5cff
+        font-size: 32px
+        flex-shrink: 0
+      }
+
+      .van-uploader__upload-text {
+        color: #7c5cff
+        font-size: 13px
+        font-weight: 500
+        flex-shrink: 0
+      }
+    }
+
+    .van-uploader__preview {
+      border-radius: 12px
+      overflow: hidden
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+      max-width: 120px
+      width: auto
+      margin: 0 auto
+      box-sizing: border-box
+
+      .van-image {
+        width: 100%
+        height: auto
+        max-width: 120px
+      }
+
+      img {
+        width: 100%
+        height: auto
+        max-width: 120px
+        display: block
+      }
+    }
+  }
+
+  // 生成按钮优化
+  .generate-btn {
+    background: linear-gradient(135deg, #7c5cff 0%, #4a9eff 100%)
+    border: none
+    border-radius: 16px
+    height: 56px
+    font-size: 17px
+    font-weight: 700
+    letter-spacing: 0.8px
+    box-shadow: 0 8px 24px rgba(124, 92, 255, 0.4), 0 4px 12px rgba(74, 158, 255, 0.3)
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    position: relative
+    overflow: hidden
+    margin-top: 8px
+
+    &::before {
+      content: ""
+      position: absolute
+      top: 0
+      left: -100%
+      width: 100%
+      height: 100%
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)
+      transition: left 0.5s ease
+    }
+
+    &:active {
+      transform: translateY(2px) scale(0.98)
+      box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3), 0 2px 6px rgba(74, 158, 255, 0.2)
+
+      &::before {
+        left: 100%
+      }
+    }
+
+    .btn-text {
+      position: relative
+      z-index: 1
+    }
+
+    .btn-icon {
+      position: relative
+      z-index: 1
+      margin-left: 8px
+      font-size: 20px
+      font-weight: 400
+      transition: transform 0.3s ease
+      display: inline-block
+    }
+
+    &:active .btn-icon {
+      transform: translateX(4px)
+    }
+  }
+
+  .tip-text {
+    padding: 12px 16px
+    line-height: 1.6
+    color: #969799
+    font-size: 13px
+    background: #f7f8fa
+    border-radius: 12px
+    margin: 12px 0
+  }
+
+  // 任务列表标题优化
+  h3 {
+    font-size: 18px
+    font-weight: 700
+    color: #1a1a1a
+    margin: 32px 0 16px
+    padding: 0
+    letter-spacing: 0.3px
+    position: relative
+    padding-left: 12px
+
+    &::before {
+      content: ""
+      position: absolute
+      left: 0
+      top: 50%
+      transform: translateY(-50%)
+      width: 4px
+      height: 18px
+      border-radius: 2px
+      background: linear-gradient(180deg, #7c5cff 0%, #4a9eff 100%)
+    }
+
+    &:first-of-type {
+      margin-top: 24px
+    }
+  }
+
+  .running-job-list {
+    .van-grid {
+      .van-grid-item {
+        .van-grid-item__content {
+          padding 0
+          position relative
+
+          .van-image, .task-in-queue {
+            min-height 100px
+          }
+
+          .progress {
+            display flex
+            justify-content center
+            align-items center
+            width 100%
+            height 100%
+            background rgba(50, 50, 50, 0.5)
+            position absolute
+            left 0
+            top 0
+
+            .van-circle__text {
+              color #ffffff
+            }
+          }
+
+          // end progress
+
+          .task-in-queue {
+            display flex
+            flex-flow column
+            justify-content center
+            align-items center
+            color #c1c1c1
+            min-height 100px
+
+            .loading-wrapper {
+              display flex
+              flex-flow column
+              align-items center
+              justify-content center
+              gap 16px
+
+              .icon-container {
+                position relative
+                display flex
+                align-items center
+                justify-content center
+                width 48px
+                height 48px
+
+                .loading-icon {
+                  font-size 28px
+                  color #4A9EFF
+                  animation rotate 2s linear infinite
+                  position relative
+                  z-index 2
+                }
+
+                .pulse-ring {
+                  position absolute
+                  width 48px
+                  height 48px
+                  border 2px solid rgba(74, 158, 255, 0.3)
+                  border-radius 50%
+                  animation pulse 2s ease-out infinite
+                  z-index 1
+                }
+              }
+
+              .text-container {
+                display flex
+                align-items center
+                justify-content center
+                gap 4px
+                flex-wrap nowrap
+
+                .text {
+                  font-size 15px
+                  font-weight 500
+                  background linear-gradient(135deg, #4A9EFF 0%, #7B68EE 50%, #9370DB 100%)
+                  -webkit-background-clip text
+                  -webkit-text-fill-color transparent
+                  background-clip text
+                  letter-spacing 0.5px
+                  white-space nowrap
+                }
+
+                .dots {
+                  display inline-flex
+                  align-items center
+                  gap 4px
+                  margin-left 4px
+                  height 12px
+
+                  .dot {
+                    width 6px
+                    height 6px
+                    border-radius 50%
+                    background-color rgba(74, 158, 255, 0.25)
+                    transition all 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+                    display inline-block
+                    position relative
+
+                    &.active {
+                      background-color #4A9EFF
+                      transform scale(1.3)
+                      box-shadow 0 0 8px rgba(74, 158, 255, 0.8), 0 0 12px rgba(74, 158, 255, 0.4)
+                      animation dotPulse 0.6s ease-in-out infinite
+                    }
+
+                    &:nth-child(1).active {
+                      animation-delay 0s
+                    }
+                    &:nth-child(2).active {
+                      animation-delay 0.2s
+                    }
+                    &:nth-child(3).active {
+                      animation-delay 0.4s
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          @keyframes rotate {
+            from {
+              transform rotate(0deg)
+            }
+            to {
+              transform rotate(360deg)
+            }
+          }
+
+          @keyframes pulse {
+            0% {
+              transform scale(0.8)
+              opacity 1
+            }
+            50% {
+              transform scale(1.2)
+              opacity 0.6
+            }
+            100% {
+              transform scale(1.5)
+              opacity 0
+            }
+          }
+
+          @keyframes dotPulse {
+            0%, 100% {
+              transform scale(1.3)
+              opacity 1
+            }
+            50% {
+              transform scale(1.5)
+              opacity 0.8
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .section-title {
+    font-size: 16px
+    font-weight: 700
+    color: #1a1a1a
+    display: flex
+    align-items: center
+    margin: 20px 0 16px
+    letter-spacing: 0.2px
+
+    &:first-child {
+      margin-top: 0
+    }
+
+    &::before {
+      content: ""
+      width: 4px
+      height: 18px
+      border-radius: 2px
+      margin-right: 10px
+      background: linear-gradient(180deg, #7c5cff 0%, #4a9eff 100%)
+      box-shadow: 0 2px 8px rgba(124, 92, 255, 0.4)
+    }
+
+    &::after {
+      content: ""
+      flex: 0 1 auto  // 改为不占据所有空间
+      height: 1px
+      margin-left: 12px
+      margin-right: 12px  // 添加右边距，为按钮留出空间
+      max-width: 200px  // 限制最大宽度
+      background: linear-gradient(90deg, rgba(124, 92, 255, 0.2) 0%, rgba(74, 158, 255, 0.1) 50%, transparent 100%)
+    }
+
+    span {
+      position: relative
+      z-index: 1
+    }
+
+    .material-search-btn {
+      margin-left: auto
+      height: 32px
+      padding: 0 16px
+      border-radius: 16px
+      font-size: 13px
+      font-weight: 600
+      box-shadow: 0 2px 8px rgba(124, 92, 255, 0.25)
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+
+      &:active {
+        transform: scale(0.95)
+        box-shadow: 0 1px 4px rgba(124, 92, 255, 0.2)
+      }
+    }
+  }
+
+  // tabs & switch text style (文生图 / 图生图)
+  .van-tabs {
+    .van-tabs__nav {
+      margin-top 4px
+    }
+
+    .van-tab {
+      font-size 13px
+      font-weight 500
+      color rgba(0, 0, 0, 0.58)
+    }
+
+    .van-tab--active {
+      color #7c5cff
+      font-weight 600
+    }
+
+    .van-tabs__line {
+      height 3px
+      border-radius 999px
+      background linear-gradient(90deg, #7c5cff 0%, #4a9eff 100%)
+    }
+  }
+
+  //end running jobs
+
+  .finish-job-list {
+    .van-grid {
+      .van-grid-item {
+        .van-grid-item__content {
+          padding 0
+
+          .job-item {
+            overflow hidden
+            border-radius 6px
+            position relative
+            height 100%
+            width 100%
+
+            .opt {
+              .opt-btn {
+                padding 2px 0
+                text-align center
+                border-radius 5px
+                margin 3px 0
+                display block
+                cursor pointer
+                background-color #4E5058
+                color #ffffff
+                font-size 14px
+                width 100%
+              }
+            }
+
+            .van-image {
+              width 100%
+              height 200px
+            }
+
+            .upscale {
+              height 260px
+              width 100%
+            }
+
+            .remove {
+              position absolute
+              right 5px
+              top 5px
+
+              .el-button {
+                margin-left 5px
+                height auto
+                padding 5px
+              }
+            }
+          }
+
+          .failed {
+            display flex
+            flex-flow column
+            justify-content center
+
+            .title {
+              margin-bottom 20px
+              text-align center
+              color #ee0a24
+              font-size 18px
+            }
+            .opt {
+              display flex
+              justify-content center
+              .van-button {
+                margin 0 5px
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
