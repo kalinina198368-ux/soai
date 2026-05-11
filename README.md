@@ -25,55 +25,8 @@
 - [x] 支持为模型绑定指定的 API KEY，支持为角色绑定指定的模型等功能
 - [x] 支持网站 Logo 版权等信息的修改
 
-## 功能截图
 
-请参考 [GeekAI 项目介绍](https://docs.geekai.me/plus/info/)。
 
-### 体验地址
-
-> 免费体验地址：[https://chat.geekai.me](https://chat.geekai.me) <br/> > **注意：请合法使用，禁止输出任何敏感、不友好或违规的内容！！！**
-
-## 快速部署
-
-请参考文档 [**GeekAI 快速部署**](https://docs.geekai.me/plus/install/)。
-
-## 使用须知
-
-1. 本项目基于 Apache2.0 协议，免费开放全部源代码，可以作为个人学习使用或者商用。
-2. 如需商用必须保留版权信息，请自觉遵守。确保合法合规使用，在运营过程中产生的一切任何后果自负，与作者无关。
-
-## 项目地址
-
-- Github 地址：https://github.com/yangjian102621/geekai
-- 码云地址：https://gitee.com/blackfox/geekai
-
-## 客户端下载
-
-目前已经支持 Win/Linux/Mac/Android 客户端，下载地址为：https://github.com/yangjian102621/geekai/releases/tag/v3.1.2
-
-## TODOLIST
-
-- [ ] 支持基于知识库的 AI 问答
-- [ ] 文生视频，文生歌曲功能
-- [ ] 微信支付功能
-
-## 项目文档
-
-最新的部署视频教程：[https://www.bilibili.com/video/BV1Cc411t7CX/](https://www.bilibili.com/video/BV1Cc411t7CX/)
-
-详细的部署和开发文档请参考 [**GeekAI 文档**](https://docs.geekai.me)。
-
-加微信进入微信讨论群可获取 **一键部署脚本（添加好友时请注明来自 Github!!!）。**
-
-![微信名片](https://docs.geekai.me/images/wx_card.png)
-
-## 参与贡献
-
-个人的力量始终有限，任何形式的贡献都是欢迎的，包括但不限于贡献代码，优化文档，提交 issue 和 PR 等。
-
-#### 特此声明：由于个人时间有限，不接受在微信或者微信群给开发者提 Bug，有问题或者优化建议请提交 Issue 和 PR。非常感谢您的配合！
-
-### Commit 类型
 
 - feat: 新特性或功能
 - fix: 缺陷修复
@@ -83,10 +36,3 @@
 - opt: 性能优化
 - chore: 一些不涉及到功能变动的小提交，比如修改文字表述，修改注释等
 
-## 打赏
-
-如果你觉得这个项目对你有帮助，并且情况允许的话，可以请作者喝杯咖啡，非常感谢你的支持～
-
-![打赏](https://blog.img.r9it.com/image-f02ca9eccbe93c7b1193c2623e7336ea.png)
-
-![Star History Chart](https://api.star-history.com/svg?repos=yangjian102621/geekai&type=Date)
