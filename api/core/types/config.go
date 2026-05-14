@@ -221,4 +221,26 @@ type SystemConfig struct {
 	//Star2UpgradeStar1Count  int `json:"star2_upgrade_star1_count"`  //升级2星时的1星数量
 	//Star3UpgradeStar2Count  int `json:"star3_upgrade_star2_count"`  //升级3星时的2星数量
 
+	// 教学：口播/提示词使用后台「语言模型」中指定 ID；语音与配图使用下列独立配置
+	TeachingScriptModelId int `json:"teaching_script_model_id"` // 教学文案与生图提示词所用 Chat 模型 ID（与 /api/admin/model 中语言模型一致）
+
+	// 字节跳动 OpenSpeech TTS v3（HTTP 单向流式）
+	TtsApiURL           string `json:"tts_api_url"`            // 默认 https://openspeech.bytedance.com/api/v3/tts/unidirectional
+	TtsApiKey           string `json:"tts_api_key"`            // 新鉴权：X-Api-Key（如火山 seed-tts-2.0）；填写则优先，可不填 AppId/AccessKey
+	TtsAppId            string `json:"tts_app_id"`             // 旧：X-Api-App-Id
+	TtsAccessKey        string `json:"tts_access_key"`         // 旧：X-Api-Access-Key
+	TtsResourceId       string `json:"tts_resource_id"`        // X-Api-Resource-Id（如 seed-tts-2.0）
+	TtsSpeaker          string `json:"tts_speaker"`            // 如 zh_female_cancan_mars_bigtts
+	TtsAudioFormat      string `json:"tts_audio_format"`       // mp3
+	TtsSampleRate       int    `json:"tts_sample_rate"`        // 24000
+	TeachingImageApiURL string `json:"teaching_image_api_url"` // 如 https://api.bltcy.ai（不含路径）
+	TeachingImageApiKey string `json:"teaching_image_api_key"` // Bearer Token
+	TeachingImageModel  string `json:"teaching_image_model"`   // 如 gpt-image-2
+	TeachingImageSize   string `json:"teaching_image_size"`    // 如 1024x1024
+
+	// 教学配图颗粒度（后台可调；0 表示走代码内默认值）
+	TeachingVisualSparse         bool `json:"teaching_visual_sparse"`           // true：一节口播一图，不拆条；false：按字数拆成多分镜
+	TeachingVisualShotMaxRunes   int  `json:"teaching_visual_shot_max_runes"`   // 每条分镜口播约多少字一切图，建议 32～80，0 默认 44
+	TeachingVisualMaxTotalShots  int  `json:"teaching_visual_max_total_shots"`  // 全稿最多保留多少条分镜，0 默认 40，范围在服务端再夹紧 8～48
+	TeachingImagePromptsLlmBatch int  `json:"teaching_image_prompts_llm_batch"` // 生图提示词每批送 LLM 条数，0 默认 8，范围 4～12
 }

@@ -154,6 +154,7 @@ import ConfigDialog from "@/components/UserInfoDialog.vue";
 import { showMessageError } from "@/utils/dialog";
 import LoginDialog from "@/components/LoginDialog.vue";
 import { substr } from "@/utils/libs";
+import { withTeachingMenu } from "@/utils/teachingMenu";
 
 const isCollapse = ref(true);
 const router = useRouter();
@@ -242,12 +243,15 @@ onMounted(() => {
   // 获取菜单
   httpGet("/api/menu/list")
     .then((res) => {
-      mainNavs.value = res.data;
+      const data = withTeachingMenu(res.data);
+      mainNavs.value = data;
       // 根据窗口的高度计算应该显示多少菜单
       const rows = Math.floor((window.innerHeight - 100) / 90);
-      if (res.data.length > rows) {
-        mainNavs.value = res.data.slice(0, rows);
-        moreNavs.value = res.data.slice(rows);
+      if (data.length > rows) {
+        mainNavs.value = data.slice(0, rows);
+        moreNavs.value = data.slice(rows);
+      } else {
+        moreNavs.value = [];
       }
     })
     .catch((e) => {

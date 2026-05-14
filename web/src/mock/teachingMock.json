@@ -1,0 +1,70 @@
+{
+  "script": {
+    "title": "「__TOPIC__」口播视频脚本草稿",
+    "outline": [
+      {
+        "id": "seg-1",
+        "title": "开场引入",
+        "text": "大家好，今天用几分钟把「__TOPIC__」讲清楚。我们会从核心概念、常见误区到一个小练习，帮助你快速建立直觉。"
+      },
+      {
+        "id": "seg-2",
+        "title": "核心讲解",
+        "text": "先记住一句话：__TOPIC__ 的本质，是把复杂问题拆成可验证的小步骤。第一步定义目标，第二步列出约束，第三步用最小实验验证假设。"
+      },
+      {
+        "id": "seg-3",
+        "title": "收尾与行动",
+        "text": "最后给你一个行动清单：复述一遍定义、写下你的约束、做一个十分钟的小实验。下一期我们会深入案例，把 __TOPIC__ 真正落地。"
+      }
+    ]
+  },
+  "tts": {
+    "voiceName": "假数据·温柔女声",
+    "items": [
+      { "segmentId": "seg-1", "fileName": "seg-1__TOPIC__.mp3", "durationSec": 18 },
+      { "segmentId": "seg-2", "fileName": "seg-2__TOPIC__.mp3", "durationSec": 42 },
+      { "segmentId": "seg-3", "fileName": "seg-3__TOPIC__.mp3", "durationSec": 28 }
+    ]
+  },
+  "imagePrompts": [
+    {
+      "segmentId": "seg-1",
+      "title": "开场画面",
+      "prompt": "Educational thumbnail, friendly presenter silhouette, soft gradient background, topic text placeholder for __TOPIC__, clean modern flat illustration, 16:9, high detail",
+      "aspectRatio": "16:9"
+    },
+    {
+      "segmentId": "seg-2",
+      "title": "要点图解",
+      "prompt": "Infographic style, three connected steps diagram, icons for goal constraints experiment, subtle purple accent, white background, topic __TOPIC__, 16:9",
+      "aspectRatio": "16:9"
+    },
+    {
+      "segmentId": "seg-3",
+      "title": "行动清单",
+      "prompt": "Checklist on clipboard illustration, motivational classroom vibe, warm lighting, topic __TOPIC__, minimal text in image, 16:9",
+      "aspectRatio": "16:9"
+    }
+  ],
+  "assets": [
+    {
+      "segmentId": "seg-1",
+      "label": "分镜 1 · 口播 + 配图",
+      "previewImage": "/images/img-placeholder.jpg",
+      "audioLabel": "seg-1__TOPIC__.mp3"
+    },
+    {
+      "segmentId": "seg-2",
+      "label": "分镜 2 · 口播 + 配图",
+      "previewImage": "/images/img-placeholder.jpg",
+      "audioLabel": "seg-2__TOPIC__.mp3"
+    },
+    {
+      "segmentId": "seg-3",
+      "label": "分镜 3 · 口播 + 配图",
+      "previewImage": "/images/img-placeholder.jpg",
+      "audioLabel": "seg-3__TOPIC__.mp3"
+    }
+  ]
+}

@@ -111,7 +111,7 @@ func main() {
 
 		// 自动创建新增表（上传码）
 		fx.Invoke(func(db *gorm.DB) {
-			_ = db.AutoMigrate(&model.UploadCode{}, &model.UploadCodeImage{})
+			_ = db.AutoMigrate(&model.UploadCode{}, &model.UploadCodeImage{}, &model.TeachingRecord{})
 		}),
 
 		fx.Provide(func() embed.FS {
@@ -627,12 +627,23 @@ func main() {
 			s.Engine.Any("/api/ws", h.Client)
 		}),
 		fx.Provide(handler.NewPromptHandler),
+		fx.Provide(handler.NewTeachingHandler),
 		fx.Invoke(func(s *core.AppServer, h *handler.PromptHandler) {
 			group := s.Engine.Group("/api/prompt")
 			group.POST("/lyric", h.Lyric)
 			group.POST("/image", h.Image)
 			group.POST("/video", h.Video)
 			group.POST("/meta", h.MetaPrompt)
+		}),
+		fx.Invoke(func(s *core.AppServer, h *handler.TeachingHandler) {
+			group := s.Engine.Group("/api/teaching")
+			group.POST("/script", h.Script)
+			group.POST("/tts", h.TTS)
+			group.POST("/image-prompts", h.ImagePrompts)
+			group.POST("/images", h.RenderImages)
+			group.GET("/record/list", h.RecordList)
+			group.GET("/record/:id", h.RecordGet)
+			group.POST("/record/save", h.RecordSave)
 		}),
 		fx.Invoke(func(s *core.AppServer, db *gorm.DB) {
 			go func() {

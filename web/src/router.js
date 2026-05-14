@@ -109,6 +109,12 @@ const routes = [
         meta: { title: "Luma视频创作" },
         component: () => import("@/views/Luma.vue"),
       },
+      {
+        name: "teaching",
+        path: "/teaching",
+        meta: { title: "教学" },
+        component: () => import("@/views/Teaching.vue"),
+      },
     ],
   },
   {
@@ -404,6 +410,12 @@ const routes = [
         name: "mobile-share",
         meta: { title: "分享邀请" },
         component: () => import("@/views/mobile/share.vue"),
+      },
+      {
+        path: "/mobile/teaching",
+        name: "mobile-teaching",
+        meta: { title: "教学" },
+        component: () => import("@/views/Teaching.vue"),
       },
     ],
   },

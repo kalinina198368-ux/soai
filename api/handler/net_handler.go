@@ -15,11 +15,12 @@ import (
 	"geekai/store/vo"
 	"geekai/utils"
 	"geekai/utils/resp"
-	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"io"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type NetHandler struct {
@@ -142,8 +143,13 @@ func (h *NetHandler) Download(c *gin.Context) {
 		resp.ERROR(c, types.InvalidArgs)
 		return
 	}
-	// 使用http.Get下载文件
-	r, err := http.Get(fileUrl)
+	req, err := http.NewRequest(http.MethodGet, fileUrl, nil)
+	if err != nil {
+		resp.ERROR(c, err.Error())
+		return
+	}
+	req.Header.Set("User-Agent", "Mozilla/5.0 (compatible; SoAI-Download/1.0)")
+	r, err := http.DefaultClient.Do(req)
 	if err != nil {
 		resp.ERROR(c, err.Error())
 		return
@@ -155,6 +161,9 @@ func (h *NetHandler) Download(c *gin.Context) {
 		return
 	}
 
+	if ct := r.Header.Get("Content-Type"); ct != "" {
+		c.Header("Content-Type", ct)
+	}
 	c.Status(http.StatusOK)
 	// 将下载的文件内容写入响应
 	_, _ = io.Copy(c.Writer, r.Body)

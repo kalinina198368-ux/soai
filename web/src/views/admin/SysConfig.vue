@@ -837,9 +837,116 @@
         </div>
       </el-tab-pane>
 
-      
+      <el-tab-pane label="教学 / TTS / 配图" name="teaching">
+        <div class="container">
+          <el-form :model="system" label-width="180px" label-position="right">
+            <el-alert
+              type="info"
+              :closable="false"
+              show-icon
+              style="margin-bottom: 16px"
+              title="教学配图颗粒度在下方「配图颗粒度」中配置；保存后若 API 未热加载配置，请重启后端服务。"
+            />
+            <el-divider content-position="left">大模型（与「语言模型」管理同一批模型）</el-divider>
+            <el-form-item label="教学文案 / 生图提示词模型">
+              <el-select
+                v-model.number="system['teaching_script_model_id']"
+                :filterable="true"
+                clearable
+                placeholder="选择用于口播脚本与生图提示词输出的 Chat 模型"
+                style="width: 100%"
+              >
+                <el-option v-for="item in models" :key="item.id" :label="item.name + ' (id=' + item.id + ')'" :value="item.id" />
+              </el-select>
+              <div class="tip" style="margin-top: 6px">与后台「语言模型」菜单中的模型 ID 一致，使用该模型绑定的 API Key 与网关地址。</div>
+            </el-form-item>
 
-    
+            <el-divider content-position="left">配图颗粒度（分镜密度 / 提示词分批）</el-divider>
+            <el-form-item label="一节一图（不拆条）">
+              <el-switch
+                v-model="system['teaching_visual_sparse']"
+                :active-value="true"
+                :inactive-value="false"
+                inline-prompt
+                active-text="开"
+                inactive-text="关"
+              />
+              <div class="tip" style="margin-top: 6px">
+                <strong>关</strong>：长口播按「每镜最大字数」拆成多条分镜（如 seg-2__1、seg-2__2），多图切换更密。<strong>开</strong>：每个大纲小节只对应一张配图。
+              </div>
+            </el-form-item>
+            <el-form-item label="每镜最大字数">
+              <el-input-number v-model="system['teaching_visual_shot_max_runes']" :min="24" :max="120" :step="4" controls-position="right" />
+              <span class="tip ml-2">数值越小图越密，建议 36～56；默认 44</span>
+            </el-form-item>
+            <el-form-item label="全稿最多分镜条数">
+              <el-input-number v-model="system['teaching_visual_max_total_shots']" :min="8" :max="48" :step="1" controls-position="right" />
+              <span class="tip ml-2">超过后不再为后续口播生成分镜，默认 40</span>
+            </el-form-item>
+            <el-form-item label="提示词 LLM 每批条数">
+              <el-input-number v-model="system['teaching_image_prompts_llm_batch']" :min="4" :max="12" :step="1" controls-position="right" />
+              <span class="tip ml-2">每批送给大模型的分镜数，默认 8；偏小更稳、偏大请求次数更少</span>
+            </el-form-item>
+
+            <el-divider content-position="left">字节 OpenSpeech TTS（HTTP 单向流式）</el-divider>
+            <el-form-item label="X-Api-Key（推荐）">
+              <el-input
+                v-model="system['tts_api_key']"
+                type="password"
+                show-password
+                placeholder="火山 seed-tts-2.0 等：填控制台下发的 API Key，与 ResourceId 搭配"
+              />
+              <div class="tip" style="margin-top: 6px">
+                若填写此项，请求头仅使用 <code>X-Api-Key</code> + <code>X-Api-Resource-Id</code>，无需再填下方 AppId / AccessKey。
+              </div>
+            </el-form-item>
+            <el-form-item label="TTS 请求地址">
+              <el-input
+                v-model="system['tts_api_url']"
+                placeholder="默认：https://openspeech.bytedance.com/api/v3/tts/unidirectional"
+              />
+            </el-form-item>
+            <el-form-item label="X-Api-App-Id（旧版，可选）">
+              <el-input v-model="system['tts_app_id']" placeholder="AppId" />
+            </el-form-item>
+            <el-form-item label="X-Api-Access-Key（旧版，可选）">
+              <el-input v-model="system['tts_access_key']" type="password" show-password placeholder="AccessKey" />
+            </el-form-item>
+            <el-form-item label="X-Api-Resource-Id">
+              <el-input v-model="system['tts_resource_id']" placeholder="例如：seed-tts-2.0" show-password />
+            </el-form-item>
+            <el-form-item label="发音人 speaker">
+              <el-input v-model="system['tts_speaker']" placeholder="例如：zh_female_cancan_mars_bigtts" />
+            </el-form-item>
+            <el-form-item label="音频格式">
+              <el-input v-model="system['tts_audio_format']" placeholder="mp3" />
+            </el-form-item>
+            <el-form-item label="采样率">
+              <el-input-number v-model="system['tts_sample_rate']" :min="8000" :max="48000" :step="1000" />
+              <span class="tip ml-2">常用 24000</span>
+            </el-form-item>
+
+            <el-divider content-position="left">教学配图（OpenAI 兼容 images/generations）</el-divider>
+            <el-form-item label="API 根地址">
+              <el-input v-model="system['teaching_image_api_url']" placeholder="例如：https://api.bltcy.ai（不含 /v1）" />
+            </el-form-item>
+            <el-form-item label="Bearer API Key">
+              <el-input v-model="system['teaching_image_api_key']" type="password" show-password placeholder="sk-..." />
+            </el-form-item>
+            <el-form-item label="生图模型 model">
+              <el-input v-model="system['teaching_image_model']" placeholder="例如：gpt-image-2" />
+            </el-form-item>
+            <el-form-item label="尺寸 size">
+              <el-input v-model="system['teaching_image_size']" placeholder="例如：1024x1024" />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click="save('system')">保存到系统配置</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-tab-pane>
+
     </el-tabs>
   </div>
 </template>
@@ -923,6 +1030,20 @@ const agentTeamRewardFields = [
   "agent_gold_team_reward",
 ];
 
+const initTeachingVisualDefaults = (s) => {
+  if (typeof s !== "object" || !s) return;
+  if (s.teaching_visual_sparse === undefined || s.teaching_visual_sparse === null) s.teaching_visual_sparse = false;
+  if (s.teaching_visual_shot_max_runes === undefined || s.teaching_visual_shot_max_runes === null) {
+    s.teaching_visual_shot_max_runes = 44;
+  }
+  if (s.teaching_visual_max_total_shots === undefined || s.teaching_visual_max_total_shots === null) {
+    s.teaching_visual_max_total_shots = 40;
+  }
+  if (s.teaching_image_prompts_llm_batch === undefined || s.teaching_image_prompts_llm_batch === null) {
+    s.teaching_image_prompts_llm_batch = 8;
+  }
+};
+
 const ensureFields = (target, fields, defaultValue = 0) => {
   fields.forEach((field) => {
     if (target[field] === undefined || target[field] === null) {
@@ -942,7 +1063,8 @@ onMounted(() => {
       ensureFields(system.value, commissionFields);
       ensureFields(system.value, discountFields);
       ensureFields(system.value, agentTeamRewardFields);
-      
+      initTeachingVisualDefaults(system.value);
+
       configBak.value = copyObj(system.value);
     })
     .catch((e) => {
@@ -1004,7 +1126,8 @@ const save = function (key) {
         ensureFields(configToSave, commissionFields);
         ensureFields(configToSave, discountFields);
         ensureFields(configToSave, agentTeamRewardFields);
-        
+        initTeachingVisualDefaults(configToSave);
+
         httpPost("/api/admin/config/update", { key: key, config: configToSave, config_bak: configBak.value })
           .then(() => {
             ElMessage.success("操作成功！");

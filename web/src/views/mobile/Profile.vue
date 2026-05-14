@@ -132,6 +132,13 @@
             <template #text><span class="grid-text">团队</span></template>
           </van-grid-item>
 
+          <van-grid-item @click="router.push('/mobile/teaching')" class="grid-item">
+            <template #icon>
+              <van-icon name="description" size="28" color="#754ff6" />
+            </template>
+            <template #text><span class="grid-text">教学</span></template>
+          </van-grid-item>
+
           <!-- 我的订单 -->
           <van-grid-item @click="handleOrderClick" class="grid-item">
             <template #icon>

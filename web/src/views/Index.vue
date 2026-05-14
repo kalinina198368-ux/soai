@@ -56,6 +56,7 @@ import { httpGet } from "@/utils/http";
 import { ElMessage } from "element-plus";
 import { checkSession, getLicenseInfo, getSystemInfo } from "@/store/cache";
 import { isMobile } from "@/utils/libs";
+import { withTeachingMenu } from "@/utils/teachingMenu";
 
 const router = useRouter();
 
@@ -85,6 +86,7 @@ const iconMap = ref({
   "/member": "icon-vip-user",
   "/invite": "icon-share",
   "/luma": "icon-luma",
+  "/teaching": "icon-book",
 });
 
 const displayedChars = ref([]);
@@ -119,7 +121,7 @@ onMounted(() => {
 
   httpGet("/api/menu/list?index=1")
     .then((res) => {
-      navs.value = res.data;
+      navs.value = withTeachingMenu(res.data);
     })
     .catch((e) => {
       ElMessage.error("获取导航菜单失败：" + e.message);
